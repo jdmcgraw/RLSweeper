@@ -9,6 +9,7 @@ class Minesweeper(object):
         self.display_field = None  # This is the public game state
         self.game_over = False
         self.mines = 10
+        self.width, self.height = None, None
         random.seed = 0
 
     def get_neighboring_mines(self, x, y):
@@ -17,6 +18,8 @@ class Minesweeper(object):
 
     def play_square(self, x, y):
         if self.game_over:
+            return
+        if (x < 1 or x > self.width) or (y < 1 or y > self.height):
             return
         # This is not zero-indexed, because it's on the side of the player's request
         self.display_field[y-1][x-1] = 1
@@ -49,6 +52,7 @@ class Minesweeper(object):
 
     def generate_field(self, height, width, show=False):
         print("[INFO] Generating Minefield")
+        self.width, self.height = width, height
         self.field = np.zeros(shape=(height, width))
         self.mines = min(self.mines, height*width)
 
@@ -63,11 +67,3 @@ class Minesweeper(object):
         self.display_field = np.zeros_like(self.field)  # This is the public game state
         if show:
             print(self.field)
-
-
-if __name__ == "__main__":
-
-    ms = Minesweeper()
-    ms.generate_field(10, 10)
-    ms.play_square(3, 3)
-    ms.flag_square(3, 4)
