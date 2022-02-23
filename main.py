@@ -7,6 +7,7 @@ class Minesweeper(object):
         print("[INIT] Game Init")
         self.field = None  # This is the hidden game state
         self.display_field = None  # This is the public game state
+        self.game_over = False
         self.mines = 10
         random.seed = 0
 
@@ -15,11 +16,15 @@ class Minesweeper(object):
         return np.sum(neighbors)
 
     def play_square(self, x, y):
+        if self.game_over:
+            return
         # This is not zero-indexed, because it's on the side of the player's request
         self.display_field[y-1][x-1] = 1
         self.draw_field()
 
     def flag_square(self, x, y):
+        if self.game_over:
+            return
         # This is not zero-indexed, because it's on the side of the player's request
         self.display_field[y-1][x-1] = 2
         self.draw_field()
@@ -35,6 +40,7 @@ class Minesweeper(object):
                         print(int(self.get_neighboring_mines(x, y)), end="\t")
                     else:
                         print("💣", end="\t")
+                        self.game_over = True
                 if self.display_field[y][x] == 2:
                     print("🚩", end="\t")
             print("\n")
