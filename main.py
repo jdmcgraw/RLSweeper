@@ -39,7 +39,7 @@ class Minesweeper(object):
                     print("🚩", end="\t")
             print("\n")
 
-    def generate_field(self, height, width):
+    def generate_field(self, height, width, show=False):
         print("[INFO] Generating Minefield")
         self.field = np.zeros(shape=(height, width))
         self.mines = min(self.mines, height*width)
@@ -53,7 +53,8 @@ class Minesweeper(object):
                 mine_counter += 1
 
         self.display_field = np.zeros_like(self.field)  # This is the public game state
-        print(self.field)
+        if show:
+            print(self.field)
 
 
 if __name__ == "__main__":
