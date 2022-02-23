@@ -25,8 +25,7 @@ class Minesweeper(object):
         self.generate_field()
 
     def get_neighboring_mines(self, x, y):
-        neighbors = self.field[:, max(0, x - 1): min(self.width - 1, x + 2)][max(0, y - 1): min(self.height - 1, y + 2),
-                    :]
+        neighbors = self.field[:, max(0, x - 1): min(self.width, x + 2)][max(0, y - 1): min(self.height, y + 2), :]
         return np.sum(neighbors)
 
     def play_square(self, x, y):
