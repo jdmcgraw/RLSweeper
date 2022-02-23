@@ -29,7 +29,7 @@ class Minesweeper(object):
         for y, row in enumerate(self.display_field):
             for x, item in enumerate(self.display_field[y]):
                 if self.display_field[y][x] == 0:
-                    print("🟦", end="\t")
+                    print("⬜", end="\t")
                 if self.display_field[y][x] == 1:
                     if self.field[y][x] == 0:
                         print(int(self.get_neighboring_mines(x, y)), end="\t")
