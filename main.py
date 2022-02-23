@@ -44,6 +44,8 @@ class Minesweeper(object):
                 if self.display_field[y][x] == 2:
                     print("🚩", end="\t")
             print("\n")
+        if self.game_over:
+            print("\nGAME OVER!\n")
 
     def generate_field(self, height, width, show=False):
         print("[INFO] Generating Minefield")
